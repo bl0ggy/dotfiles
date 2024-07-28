@@ -1,6 +1,5 @@
 -- vim.api.nvim_create_autocmd('ColorScheme', {
 --     callback = function(args)
---         print("color scheme changed")
 --         -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 --         -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 --     end,
