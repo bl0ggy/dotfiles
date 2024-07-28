@@ -29,8 +29,8 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 
+vim.opt.list = true
 vim.opt.listchars = {
     eol = "¬",
     trail = "-"
 }
-vim.opt.list = true
