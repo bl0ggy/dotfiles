@@ -1,3 +1,12 @@
+local augroup = vim.api.nvim_create_augroup('MyLspFormatOnSave', {})
+vim.api.nvim_clear_autocmds({ group = augroup })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = augroup,
+    callback = function()
+        vim.lsp.buf.format()
+    end
+})
+
 return {
     {
         "VonHeikemen/lsp-zero.nvim",
@@ -34,7 +43,7 @@ return {
         ft = "lua", -- only load on lua files
         opts = {
             library = {
-              "nvim-cmp/lua/cmp/types",
+                "nvim-cmp/lua/cmp/types",
             },
         },
     },
@@ -42,7 +51,7 @@ return {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
-            {'L3MON4D3/LuaSnip'},
+            { 'L3MON4D3/LuaSnip' },
         },
         config = function()
             local lsp_zero = require('lsp-zero')
@@ -50,7 +59,7 @@ return {
 
             local cmp = require("cmp")
             cmp.setup({
-                formatting = lsp_zero.cmp_format({details = true}),
+                formatting = lsp_zero.cmp_format({ details = true }),
                 mapping = cmp.mapping.preset.insert({
                     ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
                     ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
@@ -70,11 +79,11 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-        event = {'BufReadPre', 'BufNewFile'},
+        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'williamboman/mason-lspconfig.nvim' },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
