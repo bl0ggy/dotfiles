@@ -30,6 +30,15 @@ return {
     --     "hrsh7th/cmp-nvim-lsp",
     -- },
     {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+              "nvim-cmp/lua/cmp/types",
+            },
+        },
+    },
+    {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
