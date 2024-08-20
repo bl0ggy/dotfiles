@@ -12,3 +12,4 @@ vim.diagnostic.config({
 })
 
 vim.cmd.colorscheme("catppuccin")
+vim.g.netrw_sort_sequence = '[\\/]$'
