@@ -25,3 +25,7 @@ vim.keymap.set("n", "<C-s>", function() -- format and save file
     vim.lsp.buf.format()
     vim.cmd.write()
 end, { remap = false })
+vim.keymap.set("i", "<C-s>", function() -- format and save file
+    vim.lsp.buf.format()
+    vim.cmd.write()
+end, { remap = false })
