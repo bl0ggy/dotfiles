@@ -1,8 +1,20 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Rex)
 
-vim.keymap.set("n", "<C-u>", "<C-u>zz")               -- Page up centered
-vim.keymap.set("n", "<C-d>", "<C-d>zz")               -- Page down centered
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")               -- Page up centered
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")               -- Page down centered
+vim.keymap.set("n", "<PageUp>", "30kzz")              -- Move cursor up on scroll up
+vim.keymap.set("v", "<PageUp>", "30kzz")              --
+vim.keymap.set("i", "<PageUp>", "<Esc>30kzzi")        --
+vim.keymap.set("n", "<S-Up>", "30kzz")                --
+vim.keymap.set("v", "<S-Up>", "30kzz")                --
+vim.keymap.set("i", "<S-Up>", "<Esc>30kzzi")          --
+vim.keymap.set("n", "<PageDown>", "30jzz")            -- Move cursor down on scroll down
+vim.keymap.set("v", "<PageDown>", "30jzz")            --
+vim.keymap.set("i", "<PageDown>", "<Esc>30jzzi")      --
+vim.keymap.set("n", "<S-Down>", "30jzz")              --
+vim.keymap.set("v", "<S-Down>", "30jzz")              --
+vim.keymap.set("i", "<S-Down>", "<Esc>30jzzi")        --
 vim.keymap.set("n", "n", "nzzzv")                     -- Next search centered
 vim.keymap.set("n", "N", "Nzzzv")                     -- Previous search centered
 
