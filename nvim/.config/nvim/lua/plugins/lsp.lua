@@ -69,6 +69,19 @@ return {
                     -- ["<ESC>"] = cmp.mapping.abort(),        -- close completion window
                     ["<CR>"] = cmp.mapping.confirm({ select = false }),
                 }),
+                sorting = {
+                    priority_weight = 1,
+                    comparators = {
+                        function(entry1, entry2)
+                            local result = vim.stricmp(entry1.completion_item.label, entry2.completion_item.label)
+                            if (result < 0) then
+                                return true
+                            end
+                            return false
+                        end,
+                        cmp.config.compare.sort_text,
+                    },
+                },
                 snippet = {
                     expand = function(args)
                         require('luasnip').lsp_expand(args.body)
