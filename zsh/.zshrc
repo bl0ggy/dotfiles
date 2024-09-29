@@ -1,3 +1,4 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -28,7 +29,8 @@ bindkey '\eOH'  beginning-of-line
 bindkey '\e[F'  end-of-line
 bindkey '\eOF'  end-of-line
 
+alias la="ls -la"
+
 updatekitty () {
      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 }
-
