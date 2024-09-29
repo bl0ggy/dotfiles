@@ -32,5 +32,6 @@ vim.g.mapleader = " "
 vim.opt.list = true
 vim.opt.listchars = {
     eol = "¬",
-    trail = "-"
+    trail = "-",
+    tab = "▏ ",
 }
