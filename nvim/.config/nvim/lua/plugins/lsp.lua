@@ -61,6 +61,14 @@ return {
             cmp.setup({
                 formatting = lsp_zero.cmp_format({ details = true }),
                 mapping = cmp.mapping.preset.insert({
+                    ['<Down>'] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                    end, { "i" }),
+                    ['<Up>'] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                    end, { "i" }),
                     ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
                     ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
