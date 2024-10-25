@@ -34,3 +34,21 @@ alias la="ls -la"
 updatekitty () {
      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 }
+
+clangBase="/opt/homebrew/Cellar/llvm"
+if ! [ -d "$clangBase" ]; then
+    echo "\e[31mNo Clang version is not installed\e[0m"
+else
+    clangVersion="18.1.8"
+    clangDir="$clangBase/$clangVersion/bin"
+    if ! [ -f "$clangDir/clang" ]; then
+        echo "\e[31mClang $clangVersion not found, update .zshrc\e[0m"
+        echo "Existing versions in $clangBase:"
+        for dir in $clangBase/*/     # list directories in the form "/tmp/dirname/"
+        do
+            dir=${dir%*/}      # remove the trailing "/"
+            echo "  - ${dir##*/}"    # print everything after the final "/"
+        done
+    fi
+    PATH="$clangDir${PATH:+:${PATH}}"; export PATH;
+fi
