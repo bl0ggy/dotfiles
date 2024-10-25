@@ -50,5 +50,7 @@ else
             echo "  - ${dir##*/}"    # print everything after the final "/"
         done
     fi
-    PATH="$clangDir${PATH:+:${PATH}}"; export PATH;
 fi
+PATH="$clangDir${PATH:+:${PATH}}"; export PATH;
+export CC=clang
+export CXX=clang++
