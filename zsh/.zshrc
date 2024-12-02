@@ -58,3 +58,6 @@ fi
 PATH="$clangDir${PATH:+:${PATH}}"; export PATH;
 export CC=clang
 export CXX=clang++
+
+# Deno
+. "/Users/jessysimeon/.deno/env"
