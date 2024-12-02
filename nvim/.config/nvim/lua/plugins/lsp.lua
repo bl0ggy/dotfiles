@@ -130,6 +130,7 @@ return {
                 vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
                 vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
                 vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+                vim.keymap.set("n", "<leader>se", ":lua vim.diagnostic.open_float()<CR>");
             end)
 
             require('mason-lspconfig').setup({
