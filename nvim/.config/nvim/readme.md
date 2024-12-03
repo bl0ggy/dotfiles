@@ -15,3 +15,4 @@ I could improve those, but I'll stick to my current setup until I know more abou
 ## Useful commands (that always forget)
 
 `Telescope keymaps` to show all keymaps
+`:lua print(vim.inspect(vim.lsp.get_active_clients()))` to show the list of active LSP clients
