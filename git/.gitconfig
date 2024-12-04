@@ -1,0 +1,6 @@
+[alias]
+    ignore = "!f() { echo \"$1\" >> .gitignore; git add .gitignore; cat .gitignore | sort -u -o .gitignore; }; f"
+[init]
+	defaultBranch = main
+[merge]
+	ff = false
