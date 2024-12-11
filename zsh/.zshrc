@@ -34,6 +34,10 @@ alias la="ls -la"
 updatekitty () {
      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 }
+# Set tab title (works on Kitty)
+title() {
+    echo -e "\033]$1\007"
+}
 
 clangBase="/opt/homebrew/Cellar/llvm"
 if ! [ -d "$clangBase" ]; then
