@@ -12,4 +12,4 @@ vim.diagnostic.config({
 })
 
 vim.cmd.colorscheme("catppuccin")
-vim.g.netrw_sort_sequence = '[\\/]$'
+vim.g.netrw_sort_sequence = '[\\/]$,^\\d\\.cpp$,^\\d\\d\\.cpp$,^\\d\\d\\d\\.cpp$,^\\d\\d\\d\\d\\.cpp$,*'
