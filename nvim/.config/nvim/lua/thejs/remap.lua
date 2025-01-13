@@ -21,7 +21,7 @@ vim.keymap.set("n", "N", "Nzzzv")                -- Previous search centered
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y") -- Copy to system clipboard
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d") -- Delete without copying to clipboard
-vim.keymap.set({ "n", "v" }, "p", "P")            -- Delete without copying to clipboard
+vim.keymap.set("v", "p", "P")                     -- Delete without copying to clipboard
 
 -- Manipulating lines
 vim.keymap.set("n", "<D-Down>", ":m .+1<CR>==")       -- Move line up(n)
