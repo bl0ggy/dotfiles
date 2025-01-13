@@ -36,7 +36,12 @@ updatekitty () {
 }
 # Set tab title (works on Kitty)
 title() {
-    echo -e "\033]$1\007"
+    echo -e -n "\033]$1\007"
+    TITLE=$1
+}
+reset() {
+    command reset # This reset the title
+    title $TITLE
 }
 
 clangBase="/opt/homebrew/Cellar/llvm"
