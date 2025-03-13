@@ -55,3 +55,4 @@ end, { remap = false })
 
 -- Misc
 vim.keymap.set("n", "Q", "<nop>") -- Disable repeat last macro
+vim.keymap.set("n", "<leader>n", ":noh<CR>")
