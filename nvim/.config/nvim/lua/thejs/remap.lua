@@ -32,7 +32,8 @@ vim.keymap.set("i", "<D-Down>", "<ESC>:m .+1<CR>==i") -- Move line down(i)
 vim.keymap.set("i", "<D-Up>", "<ESC>:m .-2<CR>==i")   -- Move line down(i)
 
 -- Interface
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>") -- Quit terminal focus with Esc key
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")   -- Quit terminal focus with Esc key
+vim.keymap.set({ "n", "i" }, "<F1>", "<nop>") -- Unmap F1 opening help
 vim.keymap.set("n", "<leader>tr", ":tabprev<CR>")
 vim.keymap.set("n", "<leader>tt", ":tabnext<CR>")
 vim.keymap.set({ "n", "v" }, "<D-z>", function()
