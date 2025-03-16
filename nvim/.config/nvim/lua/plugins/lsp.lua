@@ -24,17 +24,20 @@ return {
         lazy = false,
         config = true,
     },
-    -- {
-    --     "williamboman/mason-lspconfig.nvim",
-    --     config = {
-    --         local lsp = require("lsp-zero")
-    --         require("mason-lspconfig").setup({
-    --             handlers = {
-    --                 lsp.default_setup,
-    --             },
-    --         })
-    --     },
-    -- },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            -- local lsp = require("lsp-zero")
+            -- require("mason-lspconfig").setup({
+            --     handlers = {
+            --         lsp.default_setup,
+            --     },
+            -- })
+            bashls = require 'lspconfig'.bashls.setup({
+                filetypes = { 'bash', 'sh', 'zsh' },
+            })
+        end,
+    },
     -- {
     --     "hrsh7th/cmp-nvim-lsp",
     -- },
