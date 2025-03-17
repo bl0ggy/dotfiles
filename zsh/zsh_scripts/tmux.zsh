@@ -8,6 +8,7 @@ open_tmux() {
         unset TMUX
     fi
     tmux new -A -d -s $1 -c $1
+    tmux send-keys -t $1 "nvim ." Enter
     tmux neww -t $1 -c $1
     if [ "$tmuxSet" = "0" ]; then
         tmux a -t $1:1
