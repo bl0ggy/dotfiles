@@ -10,7 +10,6 @@ title() {
 }
 reset() {
     command reset # This reset the title
-    echo "custom reset"
     title $TITLE
 }
 
