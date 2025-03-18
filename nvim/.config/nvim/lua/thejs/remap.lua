@@ -24,12 +24,12 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d") -- Delete without copying to c
 vim.keymap.set("v", "p", "P")                     -- Delete without copying to clipboard
 
 -- Manipulating lines
-vim.keymap.set("n", "<D-Down>", ":m .+1<CR>==")       -- Move line up(n)
-vim.keymap.set("n", "<D-Up>", ":m .-2<CR>==")         -- Move line down(n)
-vim.keymap.set("v", "<D-Down>", ":m '>+1<CR>gv=gv")   -- Move line up(v)
-vim.keymap.set("v", "<D-Up>", ":m '<-2<CR>gv=gv")     -- Move line down(v)
-vim.keymap.set("i", "<D-Down>", "<ESC>:m .+1<CR>==i") -- Move line down(i)
-vim.keymap.set("i", "<D-Up>", "<ESC>:m .-2<CR>==i")   -- Move line down(i)
+vim.keymap.set("n", "<C-Down>", ":m .+1<CR>==")       -- Move line down(n)
+vim.keymap.set("n", "<C-Up>", ":m .-2<CR>==")         -- Move line up(n)
+vim.keymap.set("v", "<C-Down>", ":m '>+1<CR>gv=gv")   -- Move line down(v)
+vim.keymap.set("v", "<C-Up>", ":m '<-2<CR>gv=gv")     -- Move line up(v)
+vim.keymap.set("i", "<C-Down>", "<ESC>:m .+1<CR>==i") -- Move line down(i)
+vim.keymap.set("i", "<C-Up>", "<ESC>:m .-2<CR>==i")   -- Move line up(i)
 
 -- Interface
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")   -- Quit terminal focus with Esc key
