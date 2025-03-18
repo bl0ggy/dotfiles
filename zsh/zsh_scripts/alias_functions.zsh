@@ -19,3 +19,8 @@ bindkey '\eOH' beginning-of-line
 # Allow End key to work in zsh
 bindkey '\e[F' end-of-line
 bindkey '\eOF' end-of-line
+# Allow
+bindkey "\e[1;5A" beginning-of-line
+bindkey "\e[1;5B" end-of-line
+bindkey "\e[1;5C" forward-word
+bindkey "\e[1;5D" backward-word
