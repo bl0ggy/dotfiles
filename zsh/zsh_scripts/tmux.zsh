@@ -74,7 +74,7 @@ lfzf() {
     allPaths=$(echo "$newPaths" | sort -u)
 
     # Run fzf and open tmux in the selected path
-    selected=$(echo $allPaths | fzf)
+    selected=$(echo $allPaths | fzf -q $1)
     if [ $? = 0 ]; then
         open_tmux $selected
     fi
