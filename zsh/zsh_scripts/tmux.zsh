@@ -73,8 +73,13 @@ lfzf() {
     # Update allPaths with the new content sorted and cleared from duplicates
     allPaths=$(echo "$newPaths" | sort -u)
 
+    fzfArg="$1"
+    if [ -n "$fzfArg" ]; then
+        fzfArg="-q $fzfArg"
+    fi
+
     # Run fzf and open tmux in the selected path
-    selected=$(echo $allPaths | fzf -q $1)
+    selected=$(echo $allPaths | fzf $fzfArg)
     if [ $? = 0 ]; then
         open_tmux $selected
     fi
