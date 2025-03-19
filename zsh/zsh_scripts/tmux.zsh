@@ -1,22 +1,24 @@
 #!/bin/zsh
 
 open_tmux() {
-    if [ -z ${TMUX+x} ]; then
-        tmuxSet=0
-    else
-        tmuxSet=1
-        unset TMUX
+    if [ -n "${TMUX}" ]; then
+        echo "Detach current session then re-run tmux command"
+        return
     fi
-    tmux new -A -d -s $1 -c $1
+
+    tmux has-session -t $1 2>/dev/null
+
+    if [ $? = 0 ]; then
+        tmux a -t $1
+        return
+    fi
+
+    tmux new -d -s $1 -c $1
     tmux rename-window "nvim"
     tmux send-keys -t $1 "nvim ." Enter
     tmux neww -t $1 -c $1
     tmux rename-window "run"
-    if [ "$tmuxSet" = "0" ]; then
-        tmux a -t $1:0
-    else
-        tmux switch-client -t $1
-    fi
+    tmux a -t $1:0
 }
 lfzf() {
     # Dirs to ignore from search
