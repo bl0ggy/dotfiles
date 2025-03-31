@@ -36,7 +36,7 @@ vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")   -- Quit terminal focus with Esc ke
 vim.keymap.set({ "n", "i" }, "<F1>", "<nop>") -- Unmap F1 opening help
 vim.keymap.set("n", "<leader>tr", ":tabprev<CR>")
 vim.keymap.set("n", "<leader>tt", ":tabnext<CR>")
-vim.keymap.set({ "n", "v" }, "<D-z>", function()
+vim.keymap.set({ "n", "v" }, "<leader>z", function()
     if vim.opt.wrap._value == false then
         vim.cmd(":set wrap")
     else
