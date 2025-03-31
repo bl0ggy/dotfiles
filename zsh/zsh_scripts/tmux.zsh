@@ -6,7 +6,8 @@ open_tmux() {
         return
     fi
 
-    tmux has-session -t $1 2>/dev/null
+    # `-t="$1"` instead of `-t "$1"` is important for exact match (the later matches prefixes also)
+    tmux has-session -t="$1" 2>/dev/null
 
     if [ $? = 0 ]; then
         tmux a -t $1
