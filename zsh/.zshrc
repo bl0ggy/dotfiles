@@ -1,12 +1,12 @@
 #!/bin/zsh
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-source ~/zsh_scripts/ps1.zsh
-source ~/zsh_scripts/alias_functions.zsh
+source ~/shell_scripts/ps1.sh
+source ~/shell_scripts/alias_functions.sh
 source ~/zsh_scripts/clang.zsh
 source ~/zsh_scripts/tmux-alias.zsh
-source ~/zsh_scripts/pnpm.zsh
-source ~/zsh_scripts/bun.zsh
-source ~/zsh_scripts/deno.zsh
-source ~/zsh_scripts/python.zsh
+source ~/shell_scripts/pnpm.sh
+source ~/shell_scripts/bun.sh
+source ~/shell_scripts/deno.sh
+source ~/shell_scripts/python.sh
 # source ~/zsh_scripts/nvm.zsh # Very slow, few seconds
