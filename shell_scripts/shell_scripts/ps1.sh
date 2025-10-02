@@ -21,10 +21,10 @@ myprompt() {
     PS1=""
 
     if [ -n "$BASH_VERSION" ]; then
-        ColorReset='\e[0m'
-        Red='\e[0;38;5;1m'
-        Green='\e[0;38;5;2m'
-        Blue='\e[0;38;5;6m'
+        ColorReset='\[\e[0m\]'
+        Red='\[\e[0;38;5;1m\]'
+        Green='\[\e[0;38;5;2m\]'
+        Blue='\[\e[0;38;5;6m\]'
         PROMPT_SIGN="\$"
     elif [ -n "$ZSH_VERSION" ]; then
         ColorReset=$'%{\e[0m%}'
