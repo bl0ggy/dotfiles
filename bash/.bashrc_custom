@@ -1,3 +1,5 @@
 #!/bin/bash
 
+export EDITOR=nvim
+
 source $HOME/shell_scripts/source-all.sh
