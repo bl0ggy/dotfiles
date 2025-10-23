@@ -13,7 +13,11 @@ prmptcmd() {
 precmd_functions=(prmptcmd)
 
 parse_git_branch() {
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    # Gets `bash: [: too many arguments` when there is a rebase occuring
+    # git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    
+    # Maybe fix the above?
+    git rev-parse --abbrev-ref HEAD
 }
 
 myprompt() {
