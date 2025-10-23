@@ -1,5 +1,6 @@
 alias la="ls -la"
 alias gg="git gui& gitk&"
+alias git-rebase-all=$HOME/shell_scripts/git-rebase-all.sh
 
 updatekitty() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
