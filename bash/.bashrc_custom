@@ -3,3 +3,4 @@
 export EDITOR=nvim
 
 source $HOME/shell_scripts/source-all.sh
+[ -s "$HOME/.bashrc.local" ] && \. "$HOME/.bashrc.local"
