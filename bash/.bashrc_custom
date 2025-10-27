@@ -4,3 +4,18 @@ export EDITOR=nvim
 
 source $HOME/shell_scripts/source-all.sh
 [ -s "$HOME/.bashrc.local" ] && \. "$HOME/.bashrc.local"
+
+# Make sure dotfiles is up to date
+pushd ~/git/dotfiles > /dev/null
+    git fetch origin main >/dev/null 2>&1
+    git diff --quiet && git diff --cached --quiet
+    nochanges=$?
+    if [ $nochanges -ne "0" ]; then
+        echo "❌ Please commit dotfiles changes"
+    else
+        git pull
+        if [ "$(git rev-parse main)" != "$(git rev-parse origin/main)" ]; then
+            echo "❌ dotfiles not up to date"
+        fi
+    fi
+popd > /dev/null
