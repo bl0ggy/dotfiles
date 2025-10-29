@@ -13,7 +13,7 @@ pushd ~/git/dotfiles > /dev/null
     if [ $nochanges -ne "0" ]; then
         echo "❌ Please commit dotfiles changes"
     else
-        git pull
+        git pull > /dev/null
         if [ "$(git rev-parse main)" != "$(git rev-parse origin/main)" ]; then
             echo "❌ dotfiles not up to date"
         fi
