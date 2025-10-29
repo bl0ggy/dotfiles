@@ -1,6 +1,7 @@
 alias la="ls -la"
 alias gg="git gui& gitk&"
 alias git-rebase-all=$HOME/shell_scripts/git-rebase-all.sh
+alias clearcache='sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
 
 updatekitty() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
