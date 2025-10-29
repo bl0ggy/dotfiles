@@ -55,7 +55,7 @@ myprompt() {
     fi
 
     # Add git branch if exists
-    branch=$(parse_git_branch)
+    branch=$(parse_git_branch 2> /dev/null)
     if [ -z $branch ]; then
         PS1+=""
     else
