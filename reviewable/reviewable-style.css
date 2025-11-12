@@ -7,11 +7,11 @@ div[data-line-number]:not([data-line-number="0"]):before {
   padding: 1px 3px 3px;
   font-size: x-small;
   display: block;
-  width: 20px;
+  width: 25px;
   text-align: right;
 }
 div[data-line-number]:not([data-line-number="0"]) div.hljs {
-  margin-left: 26px;
+  margin-left: 40px;
 }
 
 /************************/
