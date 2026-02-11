@@ -38,38 +38,30 @@ git fetch --all --prune
 BASE_BRANCH="origin/main"
 
 # Get all local branches except main
-# branches=$(git branch --format='%(refname:short)' | grep -v '^main$')
-# branches+=" main tttt"
 mapfile -t branches < <(git branch --format='%(refname:short)' | grep -v '^main$')
 branches+=("main")
 
 declare -A branch_paths
 while read -r path _ branch; do
-    # echo "* $path $branch"
     branch_name=$(echo "$branch" | sed 's/[][]//g' | xargs)
-    # echo "branch_name $branch_name"
     branch_paths["$branch_name"]="$path"
-    # echo "$branch_name - ${branch_paths[\"$branch_name\"]}"
 done < <(git worktree list)
-
-# echo "Paths: ${branch_paths[@]}"
-# exit 0
 
 # Iterate over branches
 for branch in "${branches[@]}"; do
     echo "Branch $branch"
-    # echo "${branch_paths[$branch]}"
     path=${branch_paths["$branch"]}
     if [ -n "$path" ]; then
-        # echo "aaaaa"
         pushd "$path" > /dev/null
     fi
     ret=$(do-one-branch $branch 2>&1)
     if [ $? -ne 0 ]; then
-        echo "$ret"
-        echo "Failed to merge"
-        read -p "Fix the rebase (or abort) then press ENTER" _
+        # Remove last line
+        echo -ne "\033[1A\033[2K"
+        echo -e "⚠️  \0033[0;31mFailed to merge $branch\0033[0m"
+        git rebase --abort
     else
+        # Remove last line
         echo -ne "\033[1A\033[2K"
     fi
     if [ -n "$path" ]; then
