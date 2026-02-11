@@ -2,6 +2,10 @@
 
 export EDITOR=nvim
 
+ddisk () {
+    ncdu --show-itemcount -x $1
+}
+
 source $HOME/shell_scripts/source-all.sh
 [ -s "$HOME/.bashrc.local" ] && \. "$HOME/.bashrc.local"
 
