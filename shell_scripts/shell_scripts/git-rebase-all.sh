@@ -58,17 +58,18 @@ for branch in "${branches[@]}"; do
     if [ $? -ne 0 ]; then
         # Remove last line
         echo -ne "\033[1A\033[2K"
-        echo -e "⚠️  \0033[0;31mFailed to merge $branch\0033[0m"
+        echo -e "⚠️  \0033[0;31mFailed to rebase $branch\0033[0m"
         git rebase --abort
     else
         # Remove last line
         echo -ne "\033[1A\033[2K"
+        echo -e "\0033[0;32m✓  Rebased $branch\0033[0m"
     fi
     if [ -n "$path" ]; then
         popd > /dev/null
     fi
 done
 
-git checkout "$current_branch"
+git switch "$current_branch" >/dev/null
 
 echo "✅ All branches processed."
