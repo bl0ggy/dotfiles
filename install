@@ -1,3 +1,13 @@
 #!/bin/bash
 
 stow -t ~/ -S $@
+
+for arg in "$@"; do
+  if [[ "$arg" == "zsh" ]]; then
+    load_zsh='[ -s "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"'
+    if ! grep -Fqx "$load_zsh" ~/.zshrc; then
+        echo "Add \`$load_zsh\` to ~/.zshrc"
+        echo "$load_zsh" >> $HOME/.zshrc
+    fi
+  fi
+done
