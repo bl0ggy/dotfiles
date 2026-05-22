@@ -15,14 +15,14 @@ precmd_functions=(prmptcmd)
 parse_git_branch() {
     # Gets `bash: [: too many arguments` when there is a rebase occuring
     # git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-    
+
     # Maybe fix the above?
     git rev-parse --abbrev-ref HEAD
 }
 
 myprompt() {
     local exitCode="$?" # This needs to be first
-    PS1=""
+    PS1="${HOSTNAME+(${HOSTNAME}) }"
 
     if [ -n "$BASH_VERSION" ]; then
         ColorReset='\[\e[0m\]'
