@@ -8,3 +8,5 @@
 	ff = true
 [core]
 	editor = nvim
+[rebase]
+	updateRefs = true

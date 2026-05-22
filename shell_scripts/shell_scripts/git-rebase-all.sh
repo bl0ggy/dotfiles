@@ -17,7 +17,7 @@ do-one-branch() {
     git switch "$branch"
 
     # Rebase onto origin/main
-    if ! git rebase "$BASE_BRANCH"; then
+    if ! git rebase "$BASE_BRANCH" --update-refs; then
         echo "⚠️  Rebase failed on $branch. Resolve conflicts and run:"
         echo "    git rebase --continue"
         return 1
@@ -49,6 +49,22 @@ done < <(git worktree list)
 
 # Iterate over branches
 for branch in "${branches[@]}"; do
+    is_leaf=true
+    for other in "${branches[@]}"; do
+        if git merge-base --is-ancestor "$branch" "origin/main" 2>/dev/null; then
+            # Always rebase branches below main
+            # Usually they're already merged branches
+            break
+        fi
+        [ "$branch" = "$other" ] && continue
+        if git merge-base --is-ancestor "$branch" "$other" 2>/dev/null; then
+            is_leaf=false
+            break
+        fi
+    done
+    if ! $is_leaf ; then
+        continue
+    fi
     echo "Branch $branch"
     path=${branch_paths["$branch"]}
     if [ -n "$path" ]; then
