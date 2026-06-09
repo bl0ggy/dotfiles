@@ -58,8 +58,11 @@ for branch in "${branches[@]}"; do
         fi
         [ "$branch" = "$other" ] && continue
         if git merge-base --is-ancestor "$branch" "$other" 2>/dev/null; then
-            is_leaf=false
-            break
+            # Branches on the same commit makes them non-leaf even though they're leafs
+            if [ "$(git rev-parse $branch)" != "$(git rev-parse $other)" ]; then
+                is_leaf=false
+                break
+            fi
         fi
     done
     if ! $is_leaf ; then
