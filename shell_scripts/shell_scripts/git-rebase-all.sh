@@ -51,6 +51,10 @@ done < <(git worktree list)
 
 # Iterate over branches
 for branch in "${branches[@]}"; do
+    # Skip the branches that we want to keep
+    if [[ "$branch" == keep/* ]]; then
+        continue
+    fi
     is_leaf=true
     for other in "${branches[@]}"; do
         if git merge-base --is-ancestor "$branch" "origin/$DEFAULT_BRANCH" 2>/dev/null; then
