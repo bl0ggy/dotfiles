@@ -9,5 +9,5 @@
 [core]
 	editor = nvim
 [rebase]
-	updateRefs = true
+	updateRefs = false
 	abbreviateCommands = true
