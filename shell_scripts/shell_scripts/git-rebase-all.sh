@@ -3,6 +3,8 @@
 # Exit immediately if a command fails
 # set -e
 
+DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+
 # Make sure we're inside a Git repo
 if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     echo "Not inside a git repository."
@@ -16,7 +18,7 @@ do-one-branch() {
     # Checkout the branch
     git switch "$branch"
 
-    # Rebase onto origin/main
+    # Rebase onto origin/$DEFAULT_BRANCH
     if ! git rebase "$BASE_BRANCH" --update-refs; then
         echo "⚠️  Rebase failed on $branch. Resolve conflicts and run:"
         echo "    git rebase --continue"
@@ -35,11 +37,11 @@ echo "Fetching and pruning..."
 git fetch --all --prune
 
 # Branch to rebase onto
-BASE_BRANCH="origin/main"
+BASE_BRANCH="origin/$DEFAULT_BRANCH"
 
-# Get all local branches except main
-mapfile -t branches < <(git branch --format='%(refname:short)' | grep -v '^main$')
-branches+=("main")
+# Get all local branches except $DEFAULT_BRANCH
+mapfile -t branches < <(git branch --format='%(refname:short)' | grep -v "^${DEFAULT_BRANCH}\$")
+branches+=("$DEFAULT_BRANCH")
 
 declare -A branch_paths
 while read -r path _ branch; do
@@ -51,8 +53,8 @@ done < <(git worktree list)
 for branch in "${branches[@]}"; do
     is_leaf=true
     for other in "${branches[@]}"; do
-        if git merge-base --is-ancestor "$branch" "origin/main" 2>/dev/null; then
-            # Always rebase branches below main
+        if git merge-base --is-ancestor "$branch" "origin/$DEFAULT_BRANCH" 2>/dev/null; then
+            # Always rebase branches below $DEFAULT_BRANCH
             # Usually they're already merged branches
             break
         fi
