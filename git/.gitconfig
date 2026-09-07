@@ -10,3 +10,4 @@
 	editor = nvim
 [rebase]
 	updateRefs = true
+	abbreviateCommands = true
