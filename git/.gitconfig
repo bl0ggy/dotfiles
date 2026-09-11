@@ -4,6 +4,7 @@
 	defaultBranch = main
 [merge]
 	ff = false
+	tool = meld
 [pull]
 	ff = true
 [core]
