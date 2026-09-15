@@ -1,6 +1,9 @@
 [alias]
 	fa = fetch --all --prune
     ignore = "!f() { echo \"$1\" >> .gitignore; git add .gitignore; cat .gitignore | sort -u -o .gitignore; }; f"
+	wt = "!$HOME/shell_scripts/git-worktree.sh add"
+	wtr = "!$HOME/shell_scripts/git-worktree.sh remove"
+	wts = worktree list
 [init]
 	defaultBranch = main
 [merge]
