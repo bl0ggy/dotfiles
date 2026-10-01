@@ -13,8 +13,7 @@ WORKSPACE_FILE="$HOME/git/work.code-workspace"
 GIT_DIR="$HOME/git"
 
 if [[ ! -f "$WORKSPACE_FILE" ]]; then
-  echo "Workspace file not found: $WORKSPACE_FILE" >&2
-  exit 1
+  echo '{ "folders": [], "settings": {} }' > "$WORKSPACE_FILE"
 fi
 
 # Strip trailing commas (JSONC -> JSON) for jq parsing
