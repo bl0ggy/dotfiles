@@ -38,11 +38,20 @@ cmd_add() {
     return
   fi
 
-  if git fetch origin "refs/heads/$remote_branch:refs/remotes/origin/$remote_branch" 2>/dev/null; then
-    echo "Using remote branch: origin/$remote_branch"
-    git worktree add -b "$local_branch" "$worktree_dir" "origin/$remote_branch"
-    return
-  fi
+  for remote in $(git remote); do
+    echo "Fetching $remote_branch from remote: $remote"
+    if git fetch "$remote" "refs/heads/$remote_branch:refs/remotes/$remote/$remote_branch" 2>/dev/null; then
+      echo "Using remote branch: $remote/$remote_branch"
+      git worktree add -b "$local_branch" "$worktree_dir" "$remote/$remote_branch"
+      return
+    fi
+    echo "Checking for refs/remotes/$remote/$remote_branch"
+    if git show-ref --verify --quiet "refs/remotes/$remote/$remote_branch"; then
+      echo "Using remote branch: $remote/$remote_branch"
+      git worktree add -b "$local_branch" "$worktree_dir" "$remote/$remote_branch"
+      return
+    fi
+  done
 
   local default_branch
   default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
