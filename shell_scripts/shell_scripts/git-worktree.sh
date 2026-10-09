@@ -102,16 +102,30 @@ cmd_remove() {
   local upstream
   upstream=$(git rev-parse --abbrev-ref "$branch@{upstream}" 2>/dev/null) || true
 
-  if [ -z "$upstream" ]; then
-    echo "Branch $branch has no upstream tracking branch. Push it before removing." >&2
-    return 1
-  fi
-
-  local ahead
-  ahead=$(git rev-list --count "$upstream..$branch")
-  if [ "$ahead" -gt 0 ]; then
-    echo "Branch $branch is $ahead commit(s) ahead of $upstream. Push it before removing." >&2
-    return 1
+  if [ -n "$upstream" ]; then
+    local ahead
+    ahead=$(git rev-list --count "$upstream..$branch")
+    if [ "$ahead" -gt 0 ]; then
+      echo "Branch $branch is $ahead commit(s) ahead of $upstream. Push it before removing." >&2
+      return 1
+    fi
+  else
+    # No tracking branch — check if any remote has this branch at the same commit
+    local tip
+    tip=$(git rev-parse "$branch")
+    local found=false
+    for remote in $(git remote); do
+      local remote_tip
+      remote_tip=$(git rev-parse "refs/remotes/$remote/$branch" 2>/dev/null) || true
+      if [ -n "$remote_tip" ] && [ "$tip" = "$remote_tip" ]; then
+        found=true
+        break
+      fi
+    done
+    if [ "$found" != true ]; then
+      echo "Branch $branch has no remote at the same commit. Push it before removing." >&2
+      return 1
+    fi
   fi
 
   local main_wt_parent
