@@ -1,3 +1,4 @@
+source $HOME/shell_scripts/dotfiles-checkup.sh
 source $HOME/shell_scripts/ps1.sh
 source $HOME/shell_scripts/alias_functions.sh
 source $HOME/shell_scripts/pnpm.sh
