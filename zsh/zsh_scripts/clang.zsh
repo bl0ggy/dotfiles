@@ -1,6 +1,6 @@
 clangBase="/opt/homebrew/Cellar/llvm"
 if ! [ -d "$clangBase" ]; then
-    echo "\e[31mNo Clang version is not installed\e[0m"
+    echo "\e[31mNo Clang version is installed\e[0m"
 else
     clangVersion="21.1.5"
     clangDir="$clangBase/$clangVersion/bin"
