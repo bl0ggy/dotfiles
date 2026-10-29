@@ -7,4 +7,4 @@ ddisk () {
 }
 
 source $HOME/shell_scripts/source-all.sh
-[ -s "$HOME/.bashrc.local" ] && \. "$HOME/.bashrc.local"
+[ -s "$HOME/.bashrc.local" ] && \. "$HOME/.bashrc.local" || true

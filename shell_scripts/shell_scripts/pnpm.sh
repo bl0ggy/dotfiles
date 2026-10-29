@@ -6,5 +6,5 @@ if [ -n "$ZSH_VERSION" ]; then
     esac
 else
     # TODO
-    false
+    true
 fi

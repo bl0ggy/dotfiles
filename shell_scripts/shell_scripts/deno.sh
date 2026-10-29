@@ -1,2 +1,2 @@
 # Deno
-[ -s "$HOME/.deno/env" ] && source "$HOME/.deno/env"
+[ -s "$HOME/.deno/env" ] && source "$HOME/.deno/env" || true
