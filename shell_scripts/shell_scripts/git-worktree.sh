@@ -83,10 +83,17 @@ cmd_add() {
 
 # Removes a worktree and deletes its local branch.
 cmd_remove() {
-  local branch="$1"
+  local force=false
+  local branch=""
+  for arg in "$@"; do
+    case "$arg" in
+      -f|--force) force=true ;;
+      *) branch="$arg" ;;
+    esac
+  done
 
   if [ -z "$branch" ]; then
-    echo "Usage: git wtr <branch>" >&2
+    echo "Usage: git wtr [-f] <branch>" >&2
     return 1
   fi
 
@@ -98,33 +105,35 @@ cmd_remove() {
     return 1
   fi
 
-  # Refuse to remove if the branch has unpushed commits
-  local upstream
-  upstream=$(git rev-parse --abbrev-ref "$branch@{upstream}" 2>/dev/null) || true
+  # Refuse to remove if the branch has unpushed commits (unless --force)
+  if [ "$force" != true ]; then
+    local upstream
+    upstream=$(git rev-parse --abbrev-ref "$branch@{upstream}" 2>/dev/null) || true
 
-  if [ -n "$upstream" ]; then
-    local ahead
-    ahead=$(git rev-list --count "$upstream..$branch")
-    if [ "$ahead" -gt 0 ]; then
-      echo "Branch $branch is $ahead commit(s) ahead of $upstream. Push it before removing." >&2
-      return 1
-    fi
-  else
-    # No tracking branch — check if any remote has this branch at the same commit
-    local tip
-    tip=$(git rev-parse "$branch")
-    local found=false
-    for remote in $(git remote); do
-      local remote_tip
-      remote_tip=$(git rev-parse "refs/remotes/$remote/$branch" 2>/dev/null) || true
-      if [ -n "$remote_tip" ] && [ "$tip" = "$remote_tip" ]; then
-        found=true
-        break
+    if [ -n "$upstream" ]; then
+      local ahead
+      ahead=$(git rev-list --count "$upstream..$branch")
+      if [ "$ahead" -gt 0 ]; then
+        echo "Branch $branch is $ahead commit(s) ahead of $upstream. Push it before removing." >&2
+        return 1
       fi
-    done
-    if [ "$found" != true ]; then
-      echo "Branch $branch has no remote at the same commit. Push it before removing." >&2
-      return 1
+    else
+      # No tracking branch — check if any remote has this branch at the same commit
+      local tip
+      tip=$(git rev-parse "$branch")
+      local found=false
+      for remote in $(git remote); do
+        local remote_tip
+        remote_tip=$(git rev-parse "refs/remotes/$remote/$branch" 2>/dev/null) || true
+        if [ -n "$remote_tip" ] && [ "$tip" = "$remote_tip" ]; then
+          found=true
+          break
+        fi
+      done
+      if [ "$found" != true ]; then
+        echo "Branch $branch has no remote at the same commit. Push it before removing." >&2
+        return 1
+      fi
     fi
   fi
 
@@ -146,8 +155,8 @@ cmd_remove() {
 }
 
 case "$1" in
-  add)    cmd_add "$2" ;;
-  remove) cmd_remove "$2" ;;
+  add)    shift; cmd_add "$@" ;;
+  remove) shift; cmd_remove "$@" ;;
   *)
     echo "Usage: git-worktree.sh {add|remove} <branch>" >&2
     exit 1
