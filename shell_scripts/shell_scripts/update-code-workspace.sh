@@ -62,7 +62,11 @@ for name in "${all_dirs[@]}"; do
 done
 
 # Extract settings (everything except folders)
-settings=$(clean_json | jq 'del(.folders) // {}')
+settings=$(clean_json | jq 'del(.folders) // {}' 2>/dev/null)
+[[ -z "$settings" ]] && settings='{}'
+
+# Build new folders array as JSON
+folders_json=$(printf '%s\n' "${ordered_folders[@]}" | jq -R '{name: ., path: .}' | jq -s '.')
 # Assemble final workspace file and add trailing commas for JSONC style
 jq -n \
   --argjson rest "$settings" \
